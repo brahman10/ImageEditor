@@ -17,6 +17,23 @@ public class BitmapModel implements Serializable, Parcelable {
     public BitmapModel() {
     }
 
+    protected BitmapModel(Parcel in) {
+        bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        isSelected = in.readByte() != 0;
+    }
+
+    public static final Creator<BitmapModel> CREATOR = new Creator<BitmapModel>() {
+        @Override
+        public BitmapModel createFromParcel(Parcel in) {
+            return new BitmapModel(in);
+        }
+
+        @Override
+        public BitmapModel[] newArray(int size) {
+            return new BitmapModel[size];
+        }
+    };
+
     public Bitmap getBitmap() {
         return bitmap;
     }
@@ -40,6 +57,7 @@ public class BitmapModel implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeParcelable(bitmap, flags);
+        dest.writeByte((byte) (isSelected ? 1 : 0));
     }
 }
