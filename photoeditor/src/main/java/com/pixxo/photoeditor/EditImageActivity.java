@@ -281,7 +281,7 @@ public class EditImageActivity extends BaseActivity
 
   private void shareImage() {
     Intent intent = new Intent(this,PreviewActivity.class);
-    List<BitmapModel> bitmapModels = new ArrayList<>();
+    ArrayList<BitmapModel> bitmapModels = new ArrayList<>();
     for (Bitmap b:final_list
          ) {
       bitmapModels.add(new BitmapModel(b));
